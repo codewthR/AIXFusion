@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Create with AI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+    body {
+      font-family: "Inter", sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div class="min-h-screen flex flex-col items-center bg-gradient-to-b from-[#b98aff] via-[#a9c9ff] to-[#a9d6ff] pt-4 pb-12 px-4">
+    
+    <button type="button" class="flex items-center gap-2 text-xs font-semibold text-[#0f1c4d] bg-white rounded-full py-1.5 px-3 shadow-md hover:shadow-lg transition-shadow">
+      <i class="fas fa-home text-[10px]"></i>
+      <a href="{% url 'sending' %}">Home</a>
+    </button>
+
+    <header class="text-center mt-8 max-w-md">
+      <h1 class="text-[#0f1c4d] font-extrabold text-3xl sm:text-4xl leading-tight">Create</h1>
+      <p class="text-[#4a4a4a] mt-2 text-sm sm:text-base font-normal">How would you like to get started?</p>
+    </header>
+
+    <main class="mt-8 flex flex-col sm:flex-row gap-6 max-w-5xl w-full justify-center">
+
+      <!-- First Article -->
+      <a href="{% url 'uplo' %}">
+      <article class="bg-white rounded-lg shadow-md max-w-xs w-full cursor-pointer">
+        <img 
+          src="https://storage.googleapis.com/a1aa/image/944ac527-288e-4e97-2989-f8d4024dff50.jpg" 
+          alt="Illustration of white Aa letters on a night mountain background with starry sky and purple hills" 
+          class="rounded-t-lg object-cover w-full h-40" 
+          draggable="false" 
+          width="320" 
+          height="160" 
+        />
+        <div class="p-4">
+          <h2 class="font-semibold text-[#0f1c4d] text-lg leading-tight mb-1">Paste in text</h2>
+          <p class="text-[#4a4a4a] text-sm leading-relaxed">Create from notes, text files</p>
+          <span class="inline-flex items-center gap-1 text-xs font-semibold text-[#2563eb] bg-[#bfdbfe] rounded px-2 py-0.5 select-none">
+            <i class="fas fa-bolt"></i>
+            Fast
+          </span>
+        </div>
+      </article>
+      </a>
+
+      <!-- Second Article -->
+       <a href="{% url 'upload'%}">
+      <article class="bg-white rounded-lg shadow-md max-w-xs w-full cursor-pointer">
+        <img 
+          src="https://storage.googleapis.com/a1aa/image/60b1f872-d348-4aaf-fb16-4714e7c90894.jpg" 
+          alt="Illustration of a white upload folder icon in a blue sky with pink clouds and green grass" 
+          class="rounded-t-lg object-cover w-full h-40" 
+          draggable="false" 
+          width="320" 
+          height="160" 
+        />
+        <div class="p-4">
+          <h2 class="font-semibold text-[#0f1c4d] text-lg leading-tight mb-1">Import file or URL</h2>
+          <p class="text-[#4a4a4a] text-sm leading-relaxed">Enhance existing docs, pdf</p>
+          <span class="inline-flex items-center gap-1 text-xs font-semibold text-[#2563eb] bg-[#bfdbfe] rounded px-2 py-0.5 select-none">
+            <i class="fas fa-bolt"></i>
+            Most Used
+          </span>
+        </div>
+      </article>
+      </a>
+
+    </main>
+
+    <footer class="mt-10 text-center max-w-md">
+      <p class="font-semibold text-[#4a4a4a] text-base">AIXFusion©</p>
+    </footer>
+
+    <button 
+      type="button" 
+      aria-label="Help" 
+      class="fixed bottom-4 right-4 w-8 h-8 bg-white rounded-full shadow-md text-[#4a4a4a] font-bold text-lg flex items-center justify-center hover:shadow-lg transition-shadow"
+    >
+      ?
+    </button>
+  </div>
+</body>
+</html>

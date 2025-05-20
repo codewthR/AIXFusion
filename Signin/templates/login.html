@@ -1,0 +1,84 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Sign In
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+ </head>
+ <body class="overflow-y-scroll min-h-screen">
+  <div class="flex min-h-screen">
+   <!-- Left side form area -->
+   <div class="flex flex-col justify-start px-6 pt-6 pb-12 w-full max-w-md bg-gradient-to-b from-[#b98aff] to-white">
+    <button class="flex items-center gap-2 text-[12px] font-semibold text-[#0f1c4d] bg-white rounded-full py-1.5 px-3 shadow-md hover:shadow-lg transition-shadow" type="button">
+  <i class="fas fa-home text-[10px]"></i>
+  <a href="{% url 'sending' %}">Home</a>
+</button>
+
+   <br>
+    {% csrf_token %}
+    <h1 class="text-3xl font-bold text-[#0c1c3f] mb-8">
+     Sign in
+    </h1>
+    <form class="flex flex-col gap-4">
+       {% csrf_token %}
+     <label class="text-sm text-gray-700 font-normal" for="email">
+      Email
+     </label>
+     <input autocomplete="email" class="border border-blue-400 rounded-md px-3 py-2 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-blue-500" id="email" type="text" name="username" placeholder="Username" required/>
+     <label class="text-sm text-gray-700 font-normal" for="password">
+      Password
+     </label>
+     <div class="relative">
+      <input autocomplete="current-password" class="w-full rounded-md border border-gray-300 bg-[#f1f5f9] px-3 py-2 pr-10 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-blue-500" id="password" name="Password" type="password" />
+      <button aria-label="Toggle password visibility" class="absolute inset-y-0 right-3 flex items-center text-gray-500" type="button">
+       <i class="fas fa-eye">
+       </i>
+      </button>
+     </div>
+     <a class="text-sm text-[#0c3b94] hover:underline w-max" href="#">
+      Forgot password?
+     </a>
+     <button
+    class="mt-6 w-full rounded-full border border-purple-300 text-Black-500 text-sm py-2
+            hover:bg-purple-300 hover:text-white transition-all duration-300 ease-in-out
+            active:scale-95 shadow-md hover:shadow-lg"
+    type="submit">
+    Sign In
+    </button>
+
+    </form>
+    <p class="mt-6 text-center text-xs text-gray-600">
+     Don't have an account?
+     <a class="text-[#0c3b94] hover:underline" href="{% url 'login' %}">
+      <b>Sign up</b>
+     </a>
+    </p>
+   </div>
+   <!-- Right side images area -->
+   <div class="hidden md:flex flex-wrap gap-6 p-6 overflow-y-auto max-h-screen w-2/3 justify-center items-start bg-white">
+    <img alt="Photo collage of a digital photo frame with sunglasses and a woman wearing sunglasses" class="rounded-lg shadow-lg rotate-[-10deg] w-[140px] h-[220px] object-cover" height="220" src="https://storage.googleapis.com/a1aa/image/a6d35d0f-4f2a-4cdc-47a2-644f1b7268c7.jpg" width="140"/>
+    <img alt="Illustration of a mountain landscape with the word 'build' in bold yellow text" class="rounded-lg shadow-lg rotate-[6deg] w-[140px] h-[220px] object-cover" height="220" src="https://storage.googleapis.com/a1aa/image/a42eeaa5-cfab-49de-766a-0303f12cef0d.jpg" width="140"/>
+    <img alt="Colorful design and conversion funnel infographic with layered steps" class="rounded-lg shadow-lg rotate-[-6deg] w-[140px] h-[220px] object-cover" height="220" src="https://storage.googleapis.com/a1aa/image/e49ff337-8eed-49a2-96f1-de8bd5a0aaac.jpg" width="140"/>
+    <img alt="Black background with sticky notes and text 'Clients loving us!'" class="rounded-lg shadow-lg rotate-[10deg] w-[140px] h-[220px] object-cover" height="220" src="https://storage.googleapis.com/a1aa/image/dfd3099c-9947-4c06-ea38-444ed16530a4.jpg" width="140"/>
+    <img alt="Close-up photo of hands wearing multiple rings" class="rounded-lg shadow-lg rotate-[-10deg] w-[140px] h-[220px] object-cover" height="220" src="https://storage.googleapis.com/a1aa/image/47711328-4f54-4c43-6018-acc96e2aaa8f.jpg" width="140"/>
+    <img alt="Food poster with various dishes and text 'SALO-SALO' in bold" class="rounded-lg shadow-lg rotate-[6deg] w-[140px] h-[220px] object-cover" height="220" src="https://storage.googleapis.com/a1aa/image/93e7af45-0e8a-4b7c-2e26-7530e9c33927.jpg" width="140"/>
+    <img alt="Book cover titled 'The Last Visitor' with dark moody background" class="rounded-lg shadow-lg rotate-[-6deg] w-[140px] h-[220px] object-cover" height="220" src="https://storage.googleapis.com/a1aa/image/2d143bad-81c8-4198-0093-126fc839611d.jpg" width="140"/>
+    <img alt="Chart showing 5 most affordable iPads with prices and bars" class="rounded-lg shadow-lg rotate-[10deg] w-[140px] h-[220px] object-cover" height="220" src="https://storage.googleapis.com/a1aa/image/7e1b22d7-867f-42dc-df17-7333139bc3ff.jpg" width="140"/>
+    <img alt="Poster titled 'How to improve your mental well-being' with pastel colors and illustrations" class="rounded-lg shadow-lg rotate-[-10deg] w-[140px] h-[220px] object-cover" height="220" src="https://storage.googleapis.com/a1aa/image/bb93596c-b273-4a5a-e1d4-de91d487aaed.jpg" width="140"/>
+    <img alt="Matcha packaging design with green background and white text" class="rounded-lg shadow-lg rotate-[6deg] w-[140px] h-[220px] object-cover" height="220" src="https://storage.googleapis.com/a1aa/image/d5d22006-a46b-4376-3646-8c90e04a0669.jpg" width="140"/>
+    <img alt="Minimalist poster with text 'ready, set, go' in serif font on beige background" class="rounded-lg shadow-lg rotate-[-6deg] w-[140px] h-[220px] object-cover" height="220" src="https://storage.googleapis.com/a1aa/image/691356ed-a03d-4445-f63d-7f04b999f1ca.jpg" width="140"/>
+    <img alt="White minimalist book cover with simple text" class="rounded-lg shadow-lg rotate-[10deg] w-[140px] h-[220px] object-cover" height="220" src="https://storage.googleapis.com/a1aa/image/28187298-c686-4f5d-9367-47f5a15f8653.jpg" width="140"/>
+   </div>
+  </div>
+ </body>
+</html>

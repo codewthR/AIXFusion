@@ -1,0 +1,303 @@
+{% load static %}
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Gamma Page
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: 'Inter', sans-serif;
+    }
+    /* Custom scrollbar for vertical scroll on right side */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #4c68c2;
+      border-radius: 3px;
+    }
+    .custom-hr {
+    border: none;
+    height: 2px;
+    background-color: rgb(255, 255, 255); /* Change this to any visible color */
+    }
+
+  </style>
+ </head>
+ <body class="bg-gradient-to-b from-[#b98aff] via-white/60 to-[#b98aff] min-h-screen flex flex-col">
+  <!-- Navbar -->
+  <nav class="flex items-center justify-between px-4 sm:px-6 md:px-10 py-3 bg-transparent">
+   <div class="flex items-center space-x-6">
+   <img alt="Logo" class="h-6 w-auto" height="30" src="{% static 'admin\img\OFFooo-removebg-preview.png' %}" width="120"/>
+    <a class="text-sm text-[#0f2c67] font-normal hover:underline" href="{% url 'products'%}">
+     Products
+    </a>
+    <a class="text-sm text-[#0f2c67] font-normal hover:underline" href="{% url 'about'%}">
+     About
+    </a>
+   </div>
+   <div class="flex items-center space-x-4 text-sm text-[#0f2c67] font-normal">
+    <button class="flex items-center space-x-1 hover:underline">
+     <i class="fas fa-globe">
+     </i>
+     <span>
+      English
+     </span>
+    </button>
+    <button class="bg-[#0f2c67] text-white text-xs font-semibold px-4 py-1 rounded-full hover:bg-[#0a1a3d] transition">
+        <a href="{% url 'login' %}">Login</a>
+    </button>
+   </div>
+  </nav>
+  <!-- Main content container -->
+  <main class="flex-grow max-w-5xl mx-auto px-4 sm:px-6 md:px-10 mt-8 mb-20 grid grid-cols-1 md:grid-cols-2 gap-4">
+   <!-- Left top card -->
+   <section class="bg-white rounded-lg p-4 flex space-x-4 shadow-sm max-w-full md:max-w-none" style="min-height: 120px;">
+    <img alt="Illustration of a laptop screen with colorful lines representing unlocking startup's full potential" class="w-[120px] h-[70px] object-contain rounded-sm flex-shrink-0" height="70" src="https://storage.googleapis.com/a1aa/image/565afe2d-9288-42e4-cc2e-6634d8c12405.jpg" width="120"/>
+    <div class="flex flex-col justify-center">
+     <h3 class="text-[#0f2c67] font-semibold text-sm leading-5 mb-1">
+      Presentations
+     </h3>
+     <p class="text-xs text-[#4b5563] leading-4 max-w-[280px]">
+      NLP Based PPT Genrator application
+     </p>
+    </div>
+   </section>
+   <!-- Right top card -->
+   <section class="bg-white rounded-lg p-4 flex space-x-4 shadow-sm max-w-full md:max-w-none" style="min-height: 120px;">
+    <img alt="Illustration of a document titled Q3 Marketing Goals with charts and text" class="w-[120px] h-[70px] object-contain rounded-sm flex-shrink-0" height="70" src="https://storage.googleapis.com/a1aa/image/eaedbd53-e872-453f-ad48-bd624782c683.jpg" width="120"/>
+    <div class="flex flex-col justify-center">
+     <h3 class="text-[#0f2c67] font-semibold text-sm leading-5 mb-1">
+      File Supported Formats
+     </h3>
+     <p class="text-xs text-[#4b5563] leading-4 max-w-[280px]">
+      Pdf, Doc, Docx.
+     </p>
+    </div>
+   </section>
+   <!-- Left bottom card -->
+   <section class="bg-white rounded-lg p-4 flex space-x-4 shadow-sm max-w-full md:max-w-none" style="min-height: 120px;">
+    <img alt="Illustration of colorful social media cards with text Olly's Birthday Dash" class="w-[120px] h-[70px] object-contain rounded-sm flex-shrink-0" height="70" src="https://storage.googleapis.com/a1aa/image/62b4c876-50b6-4260-36c4-1f0918667f03.jpg" width="120"/>
+    <div class="flex flex-col justify-center">
+     <h3 class="text-[#0f2c67] font-semibold text-sm leading-5 mb-1">
+      Genrate With Text 
+     </h3>
+     <p class="text-xs text-[#4b5563] leading-4 max-w-[280px]">
+      In Products Section Select Paste In Text To transform Text into Presentation Using Advance AI support.
+     </p>
+    </div>
+   </section>
+   <!-- Right bottom card -->
+   <section class="bg-white rounded-lg p-4 flex space-x-4 shadow-sm max-w-full md:max-w-none" style="min-height: 120px;">
+    <img alt="Illustration of a website portfolio page titled My Illustration Portfolio with colorful landscape" class="w-[120px] h-[70px] object-contain rounded-sm flex-shrink-0" height="70" src="https://storage.googleapis.com/a1aa/image/4eae9e7d-23c0-45a8-9b62-4d56f114477d.jpg" width="120"/>
+    <div class="flex flex-col justify-center">
+     <h3 class="text-[#0f2c67] font-semibold text-sm leading-5 mb-1">
+      Data Protection
+     </h3>
+     <p class="text-xs text-[#4b5563] leading-4 max-w-[280px]">
+      Saving Your Data In Cloud.
+     </p>
+    </div>
+   </section>
+  </main>
+  
+
+
+
+  <main class="max-w-[1200px] mx-auto px-6 mt-6 md:mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+   <section class="flex flex-col justify-center max-w-lg">
+    <h1 class="text-[40px] font-extrabold leading-[48px] tracking-[-0.02em] mb-4">
+     Spread Happiness
+     <br/>
+     Creating Memories.
+    </h1>
+    <p class="text-[#6B7280] text-base font-normal mb-6 max-w-[400px]">
+     AIXFusion is your Software Development Company ,
+     This is our Product DOCs,Text to Ppt Genrator (Demo Product Use only for Tranning Purposes).
+    </p>
+    <a class="bg-[#0047CC] text-white rounded-full px-6 py-3 w-max text-base font-semibold hover:bg-[#003bb5] transition" href="{% url 'products'%}">
+     Use for free
+    </a>
+   </section>
+   <section class="space-y-6">
+    <div class="flex items-center justify-between bg-gradient-to-r from-[#A7C8FF] to-[#D3E2FF] rounded-lg p-4 max-w-full">
+     <button class="bg-white text-[#0047CC] text-xs font-semibold rounded-md px-4 py-2">
+      Publish website
+     </button>
+     <div class="flex flex-col bg-white rounded-lg shadow-md text-xs w-[280px] font-normal">
+      <button class="flex items-center justify-between px-3 py-2 border-b border-gray-200 text-[#6B7280]">
+       <div class="flex items-center space-x-2">
+        <i class="fas fa-globe text-[#A7C8FF]">
+        </i>
+        <span>
+         Publish to my site
+        </span>
+       </div>
+       <i class="fas fa-arrow-right text-[#6B7280]">
+       </i>
+      </button>
+      <button class="flex items-center justify-between px-3 py-2 text-[#F97316]">
+       <div class="flex items-center space-x-2">
+        <i class="fas fa-user-friends text-[#F97316]">
+        </i>
+        <span>
+         Invite others to collaborate
+        </span>
+       </div>
+       <i class="fas fa-arrow-right text-[#F97316]">
+       </i>
+      </button>
+     </div>
+     <img alt="Hot air balloon floating among clouds with blue sky background" class="h-16 w-auto rounded-md" height="60" src="https://storage.googleapis.com/a1aa/image/319b9c82-1717-4d3e-f2ec-540046764466.jpg" width="120"/>
+    </div>
+    <div class="bg-[#5EB1FF] rounded-xl p-6 relative text-white font-mono-custom max-w-full" style="min-height: 320px;">
+     <img alt="3D pink mushrooms with green stems on bright blue background" class="rounded-xl absolute top-6 left-6 max-w-[320px] max-h-[320px]" height="320" src="{% static 'admin\img\Img001.png'%}" width="320"/>
+     
+       <i class="fas fa-star text-[#0047CC]">
+       </i>
+      </button>
+     </div>
+    </div>
+   </section>
+  </main>
+
+<br>
+<br><br>
+
+
+
+  <footer class="w-full max-w-full px-6 sm:px-10 md:px-16 lg:px-24 xl:px-32 py-10 text-black text-[12px] leading-tight">
+   <div class="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-4">
+    <div>
+     <h3 class="font-bold text-[13px] mb-1">
+      Product
+     </h3>
+     <ul class="space-y-0.5">
+      <li>
+       <a class="hover:underline" href="#">
+        Pricing
+       </a>
+      </li>
+      <li>
+       <a class="hover:underline" href="#">
+        Templates
+       </a>
+      </li>
+      <li>
+       <a class="hover:underline" href="#">
+        Inspiration
+       </a>
+      </li>
+      <li>
+       <a class="hover:underline" href="#">
+        Insights
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div>
+     <h3 class="font-bold text-[12px] mb-1">
+      Company
+     </h3>
+     <ul class="space-y-0.5">
+      <li>
+       <a class="hover:underline" href="#">
+        About
+       </a>
+      </li>
+      <li>
+       <a class="hover:underline" href="#">
+        Careers
+       </a>
+      </li>
+      <li>
+       <a class="hover:underline" href="#">
+        Team
+       </a>
+      </li>
+      <li>
+       <a class="hover:underline" href="#">
+        Help
+       </a>
+      </li>
+      <li>
+       <a class="hover:underline" href="#">
+        Contact us
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div>
+     <h3 class="font-bold text-[12px] mb-1">
+      Social
+     </h3>
+     <ul class="space-y-0.5">
+      <li>
+       <a class="hover:underline" href="#">
+        Instagram
+       </a>
+      </li>
+      <li>
+       <a class="hover:underline" href="#">
+        Linkedin
+       </a>
+      </li>
+      <li>
+       <a class="hover:underline" href="#">
+        TikTok
+       </a>
+      </li>
+      <li>
+       <a class="hover:underline" href="#">
+        X
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div>
+     <h3 class="font-bold text-[12px] mb-1">
+      Privacy
+     </h3>
+     <ul class="space-y-0.5">
+      <li>
+       <a class="hover:underline" href="#">
+        Terms of Service
+       </a>
+      </li>
+      <li>
+       <a class="hover:underline" href="#">
+        Privacy Policy
+       </a>
+      </li>
+      <li>
+       <a class="hover:underline" href="#">
+        Cookie Notice
+       </a>
+      </li>
+      <li>
+       <a class="hover:underline" href="#">
+        Cookie Preferences
+       </a>
+      </li>
+     </ul>
+    </div>
+   </div>
+
+    <div class="mt-12 bold colors-blue">
+    <hr class="custom-hr">
+    </div>
+
+   <div class="mt-8 text-[11px] font-bold text-right text-black/70 max-w-7xl mx-auto">
+    © 2025 AIXFusion, Inc.
+   </div>
+
+  </footer>
+
+ </body>
+</html>
