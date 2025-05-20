@@ -1,0 +1,1 @@
+pip install nltk python-pptx python-docx PyMuPDF transformers django pillow
