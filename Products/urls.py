@@ -8,6 +8,6 @@ urlpatterns = [
     path('upload', views.home, name='upload'),
     path('convert/', views.convert_to_ppt, name='convert'),
 
-    path('uplo', views.ho, name='uplo'),
-    path('converting', views.convert_text_to_ppt, name='converting'),
+    path('uplo', views.generate_ppt, name='uplo'),
+    # path('converting', views.convert_text_to_ppt, name='converting'),
 ]

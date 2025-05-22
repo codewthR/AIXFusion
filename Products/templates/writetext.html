@@ -1,59 +1,41 @@
-{% load static %}
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <title>Paste In</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI PowerPoint Generator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="min-h-screen bg-gradient-to-b from-[#f7f8fc] via-[#a1c7f9] to-[#e9f7ff] flex flex-col items-center px-4 py-6">
-        <header class="w-full max-w-5xl">
-            <button class="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-4 py-1 text-gray-700 text-sm font-normal shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400" type="button">
-                <a href="{% url 'products'%}"><i class="fas fa-arrow-left text-[14px]"></i>
-                Back</a>
-            </button>
-        </header>
-        <main class="w-full max-w-3xl mt-10 flex flex-col items-center">
-            <div class="flex items-center gap-2 mb-1">
-                <img alt="Blue document icon with lines representing text" class="shrink-0" height="45" src="{%static 'admin\img\img002.png'%}" width="50"/>
-                <h1 class="text-3xl font-extrabold text-[#0f1f47] leading-tight select-none">Paste in</h1>
-            </div>
-            <p class="text-[#4a5568] text-sm font-normal mb-8 select-none">Add the notes, outline or content you'd like to use</p>
-
-           <!-- Inside form: Replace input/textarea wrappers with wider width -->
-<form method="post" action="{% url 'converting' %}">
-    {% csrf_token %}
+<body class="min-h-screen bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-600 flex items-center justify-center p-4">
     
-    <div class="mb-4 w-[700px]">
-        <label class="block mb-2 text-sm font-medium text-gray-800">Title:</label>
-        <input type="text" name="title" class="w-full h-10 px-3 border border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Enter title" required />
-    </div>
 
-    <div class="mb-4 w-[700px]">
-        <label class="block mb-2 text-sm font-medium text-gray-800">Author:</label>
-        <input type="text" name="author" class="w-full h-10 px-3 border border-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Enter author name" required />
-    </div>
+  <div class="bg-white rounded-xl shadow-lg p-6 w-full max-w-md">
+    <h2 class="text-2xl font-semibold text-center text-gray-800 mb-4">Generate AI Presentation</h2>
+    
+    <form method="POST" class="space-y-4">
+      {% csrf_token %}
+      <div>
+        <label for="topic" class="block text-sm font-medium text-gray-700 mb-1">Presentation Topic</label>
+        <input 
+          type="text" 
+          id="topic" 
+          name="topic" 
+          placeholder="e.g. Artificial Intelligence" 
+          required 
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        >
+      </div>
+      
+      <button 
+        type="submit" 
+        class="w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition"
+      >
+        Generate PPTX
+      </button>
+    </form>
 
-    <div class="mb-4 w-[700px]">
-        <label class="block mb-2 text-sm font-medium text-gray-800">Content:</label>
-        <textarea class="w-full h-64 rounded-md border border-gray-800 p-4 text-gray-600 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Type or paste in content here" name="text" required></textarea>
-    </div>
+    <p class="text-center text-sm text-gray-500 mt-6">Powered by <span class="font-semibold text-indigo-600">AIXFusion</span></p>
+  </div>
 
-    <button class="mt-8 w-[700px] rounded-full bg-[#a1c7f9] px-6 py-3 text-white text-sm font-semibold hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400" type="submit">
-        Generate PPT
-        <i class="fas fa-arrow-right text-xs"></i>
-    </button>
-</form>
-
-        </main>
-    </div>
 </body>
 </html>

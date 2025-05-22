@@ -19,64 +19,71 @@ from pptx.util import Inches
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
+import io
+import openai
+from pptx import Presentation
+from pptx.util import Inches
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render
 
-from sumy.parsers.plaintext import PlaintextParser
-from sumy.nlp.tokenizers import Tokenizer
-from sumy.summarizers.lsa import LsaSummarizer
+# Configure DeepSeek API
+openai.api_key = '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'
+# openai.api_base = 'https://api.deepseek.com/v1'  # Replace with the actual DeepSeek base URL if different
+openai.api_base = "https://openrouter.ai/api/v1"
+@csrf_exempt
+def generate_ppt(request):
+    if request.method == 'POST':
+        topic = request.POST.get('topic', 'Artificial Intelligence')
 
+        # Step 1: Generate AI text with DeepSeek
+        try:
+            response = openai.ChatCompletion.create(
+                model="openrouter/auto",  # Replace with correct DeepSeek model name if different
+                messages=[
+                    {"role": "system", "content": "You are a helpful assistant that writes slide content for presentations."},
+                    {"role": "user", "content": f"Create a PowerPoint slide outline and content for a presentation on '{topic}'."}
+                ],
+                max_tokens=800
+            )
+            ai_text = response.choices[0].message['content']
+        except Exception as e:
+            return HttpResponse(f"Error generating AI content with DeepSeek: {e}")
 
-def ho(request):
+        # Step 2: Create PowerPoint presentation
+        prs = Presentation()
+        slide_layout = prs.slide_layouts[1]  # Title and Content
+
+        slides = ai_text.split('\n\n')
+        for section in slides:
+            lines = section.strip().split('\n')
+            if not lines:
+                continue
+            title = lines[0]
+            content = lines[1:]
+
+            slide = prs.slides.add_slide(slide_layout)
+            slide.shapes.title.text = title
+            content_box = slide.placeholders[1]
+            content_box.text = "\n".join(content)
+
+        # Step 3: Return PPTX file in HTTP response
+        ppt_io = io.BytesIO()
+        prs.save(ppt_io)
+        ppt_io.seek(0)
+
+        response = HttpResponse(
+            ppt_io.read(),
+            content_type='application/vnd.openxmlformats-officedocument.presentationml.presentation'
+        )
+        response['Content-Disposition'] = f'attachment; filename="{topic.replace(" ", "_")}.pptx"'
+        return response
+
     return render(request, 'writetext.html')
 
 
-def summarize_text(text, sentence_count=5):
-    parser = PlaintextParser.from_string(text, Tokenizer("english"))
-    summarizer = LsaSummarizer()
-    summary = summarizer(parser.document, sentence_count)
-    return [str(sentence) for sentence in summary]
 
 
-@csrf_exempt
-def convert_text_to_ppt(request):
-    if request.method == 'POST':
-        title = request.POST.get("title", "Untitled Presentation")
-        author = request.POST.get("author", "Anonymous")
-        raw_text = request.POST.get("text", "")
-
-        if not raw_text.strip():
-            return HttpResponse("No text provided.")
-
-        summarized_sections = summarize_text(raw_text)
-
-        prs = Presentation()
-        title_slide_layout = prs.slide_layouts[0]
-        content_slide_layout = prs.slide_layouts[1]
-
-        # Title Slide
-        slide = prs.slides.add_slide(title_slide_layout)
-        slide.shapes.title.text = title
-        slide.placeholders[1].text = author
-
-        # Content Slide
-        slide = prs.slides.add_slide(content_slide_layout)
-        slide.shapes.title.text = "Summary"
-        body_shape = slide.shapes.placeholders[1]
-        tf = body_shape.text_frame
-        for line in summarized_sections:
-            tf.add_paragraph().text = "• " + line.strip()
-
-        # Save and return as HTTP response
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".pptx") as tmp_ppt:
-            prs.save(tmp_ppt.name)
-            tmp_ppt.seek(0)
-            response = HttpResponse(
-                tmp_ppt.read(),
-                content_type='application/vnd.openxmlformats-officedocument.presentationml.presentation'
-            )
-            response['Content-Disposition'] = 'attachment; filename="text_to_ppt.pptx"'
-            return response
-
-    return HttpResponse("Invalid request method.")
 
 
 
