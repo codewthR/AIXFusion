@@ -20,66 +20,69 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 import io
-import openai
 from pptx import Presentation
-from pptx.util import Inches
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
+import google.generativeai as genai
 
-# Configure DeepSeek API
-openai.api_key = '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'
-# openai.api_base = 'https://api.deepseek.com/v1'  # Replace with the actual DeepSeek base URL if different
-openai.api_base = "https://openrouter.ai/api/v1"
+# Configure Gemini API
+genai.configure(api_key="AIzaSyBKsr-HEIlYsAxOJQXqiQ7goPY2WHPYLzk")  # Replace with your actual Gemini API key
+
 @csrf_exempt
 def generate_ppt(request):
     if request.method == 'POST':
         topic = request.POST.get('topic', 'Artificial Intelligence')
 
-        # Step 1: Generate AI text with DeepSeek
+        # Step 1: Generate slide content using Gemini
         try:
-            response = openai.ChatCompletion.create(
-                model="openrouter/auto",  # Replace with correct DeepSeek model name if different
-                messages=[
-                    {"role": "system", "content": "You are a helpful assistant that writes slide content for presentations."},
-                    {"role": "user", "content": f"Create a PowerPoint slide outline and content for a presentation on '{topic}'."}
-                ],
-                max_tokens=800
-            )
-            ai_text = response.choices[0].message['content']
+            model = genai.GenerativeModel(model_name="gemini-2.0-flash")
+            prompt = f"""Create a PowerPoint slide outline and content for a presentation on '{topic}'. 
+Break the presentation into slides, and for each slide, provide:
+- A title on the first line
+- Followed by 3 to 5 bullet points (each starting with '-') on the next lines
+Separate slides with a blank line."""
+
+            response = model.generate_content(prompt)
+            ai_text = response.text.strip()
+
+            if not ai_text:
+                return HttpResponse("Gemini did not return any content.")
         except Exception as e:
-            return HttpResponse(f"Error generating AI content with DeepSeek: {e}")
+            return HttpResponse(f"Error generating content with Gemini: {str(e)}")
 
-        # Step 2: Create PowerPoint presentation
+        # Step 2: Create PowerPoint
         prs = Presentation()
-        slide_layout = prs.slide_layouts[1]  # Title and Content
+        slide_layout = prs.slide_layouts[1]  # Title and Content layout
 
-        slides = ai_text.split('\n\n')
-        for section in slides:
-            lines = section.strip().split('\n')
+        sections = ai_text.split('\n\n')
+        for section in sections:
+            lines = [line.strip() for line in section.strip().split('\n') if line.strip()]
             if not lines:
                 continue
             title = lines[0]
-            content = lines[1:]
+            content = lines[1:] or ["(No content)"]
 
             slide = prs.slides.add_slide(slide_layout)
             slide.shapes.title.text = title
-            content_box = slide.placeholders[1]
-            content_box.text = "\n".join(content)
+            slide.placeholders[1].text = "\n".join(content)
 
-        # Step 3: Return PPTX file in HTTP response
+        # Step 3: Return PPTX file
         ppt_io = io.BytesIO()
         prs.save(ppt_io)
         ppt_io.seek(0)
 
+        safe_filename = topic.replace(" ", "_").replace("/", "_")
         response = HttpResponse(
             ppt_io.read(),
             content_type='application/vnd.openxmlformats-officedocument.presentationml.presentation'
         )
-        response['Content-Disposition'] = f'attachment; filename="{topic.replace(" ", "_")}.pptx"'
+        response['Content-Disposition'] = f'attachment; filename="{safe_filename}.pptx"'
         return response
 
+    # GET request: show input form
     return render(request, 'writetext.html')
+
 
 
 
